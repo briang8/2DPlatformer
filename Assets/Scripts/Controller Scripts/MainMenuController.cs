@@ -6,7 +6,14 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour {
 
 	public void PlayGame() {
-		SceneManager.LoadScene ("Gameplay");
+		SceneManager.LoadScene ("GameScene-ALU");
 	}
+
+	public void QuitGame() {
+        Application.Quit();
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+    }
 
 }

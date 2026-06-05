@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerDamage : MonoBehaviour {
 
@@ -11,12 +10,17 @@ public class PlayerDamage : MonoBehaviour {
 
 	private bool canDamage;
 
+	private SpriteRenderer spriteRenderer;
+    private PlayerMovement playerMovement;
+
 	void Awake () {
 		lifeText = GameObject.Find ("LifeText").GetComponent<Text> ();
 		lifeScoreCount = 3;
 		lifeText.text = "x" + lifeScoreCount;
 
 		canDamage = true;
+		spriteRenderer  = GetComponent<SpriteRenderer>();
+        playerMovement  = GetComponent<PlayerMovement>();
 	}
 
 	void Start() {
@@ -33,9 +37,9 @@ public class PlayerDamage : MonoBehaviour {
 			}
 
 			if (lifeScoreCount == 0) {
-				// RESTART THE GAME
-				Time.timeScale = 0f;
-				StartCoroutine(RestartGame());
+            // No lives left — hand off to GameManager
+            GameManager.Instance.ShowEndScreen();
+            return;
 			}
 
 			canDamage = false;
@@ -45,54 +49,23 @@ public class PlayerDamage : MonoBehaviour {
 	}
 
 	IEnumerator WaitForDamage() {
-		yield return new WaitForSeconds (2f);
-		canDamage = true;
+    // Flash the player sprite for 2 seconds, then respawn to last safe ground position
+    float elapsed = 0f;
+    float duration = 2f;
+    while (elapsed < duration) {
+        spriteRenderer.enabled = !spriteRenderer.enabled;   // toggle visibility
+        yield return new WaitForSeconds(0.15f);
+        elapsed += 0.15f;
+    }
+    spriteRenderer.enabled = true;   // make sure sprite is visible after flashing
+
+    // Teleport back to the last position the player stood on solid ground
+    transform.position = playerMovement.lastSafePosition;
+
+    canDamage = true;
 	}
 
-	IEnumerator RestartGame() {
-		yield return new WaitForSecondsRealtime(2f);
-		SceneManager.LoadScene ("Gameplay");
-	}
+	
 
 } // class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

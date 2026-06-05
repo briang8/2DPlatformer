@@ -25,7 +25,7 @@ public class CameraFollow : MonoBehaviour {
 	void Start () {
 		
 		//Assign the player gameobject to the transform target here.
-		
+        target = GameObject.FindGameObjectWithTag("Player").transform;
 		offsetZ = (transform.position - target.position).z;
 		followsPlayer = true;
 	}
