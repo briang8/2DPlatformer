@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 
@@ -18,6 +19,9 @@ public class GameManager : MonoBehaviour {
 
     // ── Singleton ────────────────────────────────────────────────
     public static GameManager Instance;
+
+    [Header("Game Over Text")]
+    public TextMeshProUGUI GameOverText;
 
     void Awake () {
         Instance = this;
@@ -61,9 +65,18 @@ public class GameManager : MonoBehaviour {
 
     public void ShowEndScreen () {
         Time.timeScale = 0f;
-        if (endPanel != null) endPanel.SetActive(true);
         FindFirstObjectByType<GameTimer>()?.SetTimerRunning(false);
+        if (GameOverText != null) GameOverText.text = "Game Over!";
+        if (endPanel != null) endPanel.SetActive(true);
     }
+
+    public void ShowWinScreen () {
+    Time.timeScale = 0f;
+    FindFirstObjectByType<GameTimer>()?.SetTimerRunning(false);
+    if (GameOverText != null) GameOverText.text = "YOU WIN!";
+    if (endPanel != null) endPanel.SetActive(true);
+    }
+    
 
     public void ReplayGame () {
         Time.timeScale = 1f;

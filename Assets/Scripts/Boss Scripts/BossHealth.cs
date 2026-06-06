@@ -29,6 +29,7 @@ public class BossHealth : MonoBehaviour {
 					GetComponent<BossScript>().DeactivateBossScript();
 					anim.Play("BossDead");
 					StartCoroutine(BossDead());
+					FindFirstObjectByType<ScoreManager>().BossDefeated();
 				}
 
 				StartCoroutine (WaitForDamage ());
