@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour {
     public void ShowEndScreen () {
         Time.timeScale = 0f;
         if (endPanel != null) endPanel.SetActive(true);
+        FindFirstObjectByType<GameTimer>()?.SetTimerRunning(false);
     }
 
     public void ReplayGame () {

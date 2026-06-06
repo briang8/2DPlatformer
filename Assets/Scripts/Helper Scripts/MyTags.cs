@@ -12,5 +12,6 @@ public class MyTags : MonoBehaviour {
 	public static string SNAIL_TAG = "Snail";
 	public static string SPIDER_TAG = "Spider";
 	public static string BOSS_TAG = "Boss";
+	public static string FROG_TAG = "Frog";
 
 }

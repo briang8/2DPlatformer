@@ -68,14 +68,20 @@ public class BirdScript : MonoBehaviour {
 
 	void DropTheEgg() {
 		if (!attacked) {
-			if (Physics2D.Raycast (transform.position, Vector2.down, Mathf.Infinity, playerLayer)) {
-				Instantiate (birdEgg, new Vector3 (transform.position.x,
-					transform.position.y - 1f, transform.position.z), Quaternion.identity);
-				attacked = true;
-				anim.Play ("BirdFly");
+			if (Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, playerLayer)) {
+				Instantiate(birdEgg, new Vector3(transform.position.x,
+                transform.position.y - 1f, transform.position.z), Quaternion.identity);
+                attacked = true;
+                anim.Play("BirdFly");
+                StartCoroutine(ResetAttack());   
+				}
 			}
 		}
-	}
+
+	IEnumerator ResetAttack() {
+    yield return new WaitForSeconds(2f);
+    attacked = false;
+}
 
 	IEnumerator BirdDead() {
 		yield return new WaitForSeconds (3f);
