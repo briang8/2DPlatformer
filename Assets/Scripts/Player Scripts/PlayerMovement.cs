@@ -29,8 +29,6 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void Update () {
-		//Check if the player is grounded here to ensure the player is not jumping mid air
-		//Make the player jump
 		PlayerJump ();
 		CheckIfGrounded ();
 

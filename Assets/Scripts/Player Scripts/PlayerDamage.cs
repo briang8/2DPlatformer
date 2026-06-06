@@ -37,7 +37,6 @@ public class PlayerDamage : MonoBehaviour {
 			}
 
 			if (lifeScoreCount == 0) {
-            // No lives left — hand off to GameManager
             GameManager.Instance.ShowEndScreen();
             return;
 			}

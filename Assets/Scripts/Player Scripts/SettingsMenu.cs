@@ -24,7 +24,6 @@ public class SettingsMenu : MonoBehaviour {
         musicVolumeSlider.value = savedVolume;
         musicVolumeSlider.onValueChanged.AddListener(OnVolumeChanged);
 
-        // Apply saved settings to the AudioSource immediately
         musicSource.volume = savedVolume;
         if (musicOn) musicSource.Play();
         else musicSource.Stop();

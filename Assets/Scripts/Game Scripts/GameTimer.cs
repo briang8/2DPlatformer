@@ -37,7 +37,7 @@ public class GameTimer : MonoBehaviour {
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    // Call this to pause/resume the timer if needed
+    // Call this to pause/resume the timer
     public void SetTimerRunning (bool running) {
         timerRunning = running;
     }
